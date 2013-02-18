@@ -24,7 +24,7 @@
     <feature name='${project.artifactId}' version='${project.version}'>
         <feature version="[${camel-version},3)">camel-spring</feature>
         <feature version="[${camel-version},3)">camel-ssh</feature>
-        <bundle dependency="true">mvn:org.bouncycastle/bcpkix-jdk15on/${bouncycastle-version}</bundle>
+        <bundle dependency="true">mvn:org.bouncycastle/bcprov-jdk15on/${bouncycastle-version}</bundle>
         <bundle>mvn:${project.groupId}/${project.artifactId}/${project.version}</bundle>
     </feature>
 

@@ -44,13 +44,27 @@
     </bean>
 
     <!--
-        Note: you need to XMl or URL encode newlines in the pollCommand property
-              XML DSL encoding = &#10;
-              Java DSL encoding = %0A
+        Note: you need to XMl or URL encode newlines
+              XML encoding = &#10;
+              URL encoding = %0A
     -->
     <camelContext id="example-security-camel-ssh-context"
                   xmlns="http://camel.apache.org/schema/spring">
-        <route id="camel-example-ssh-consumer">
+        <route id="camel-example-ssh-consumer" autoStartup="false">
+            <from uri="ssh://karaf:karaf@localhost:8101?useFixedDelay=true&amp;delay=5000&amp;pollCommand=features:list%0A"/>
+            <log message="${body}"/>
+        </route>
+
+        <route id="camel-example-ssh-producer" autoStartup="false">
+            <from uri="timer:ssh?period=5000&amp;fixedRate=true"/>
+            <setBody>
+                <constant>features:list&#10;</constant>
+            </setBody>
+            <to uri="ssh://karaf:karaf@localhost:8101"/>
+            <log message="${body}"/>
+        </route>
+
+        <route id="camel-example-ssh-consumer-secure" autoStartup="true">
             <from uri="ssh://scott@localhost:8101?keyPairProvider=#resourceKeyPairProvider&amp;useFixedDelay=true&amp;delay=5000&amp;pollCommand=features:list%0A"/>
             <log message="${body}"/>
         </route>

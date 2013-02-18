@@ -32,11 +32,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <camel-version>2.10.3</camel-version>
-        <mina2-version>2.0.7</mina2-version>
-        <sshd-version>0.8.0</sshd-version>
-        <bouncycastle-version>1.47</bouncycastle-version>
-        <slf4j-version>1.7.2</slf4j-version>
+        <sshd-version>0.6.0</sshd-version>
+        <bouncycastle-version>1.46</bouncycastle-version>
+        <slf4j-version>1.6.6</slf4j-version>
         <log4j-version>1.2.17</log4j-version>
+        <junit-version>4.10</junit-version>
     </properties>
 
     <build>
@@ -78,10 +78,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Import-Package>
-                            org.apache.camel.component.ssh,
-                            *
-                        </Import-Package>
+                        <Import-Package>*</Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
@@ -137,14 +134,7 @@
             <version>${camel-version}</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>org.apache.mina</groupId>
-            <artifactId>mina-core</artifactId>
-            <version>${mina2-version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
+        <!-- Public Key dependencies -->
         <dependency>
             <groupId>org.apache.sshd</groupId>
             <artifactId>sshd-core</artifactId>
@@ -155,12 +145,15 @@
             <artifactId>bcpg-jdk15on</artifactId>
             <version>${bouncycastle-version}</version>
         </dependency>
+<!--
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>${bouncycastle-version}</version>
         </dependency>
+-->
 
+        <!-- logging dependencies -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -184,6 +177,18 @@
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-test</artifactId>
             <version>${camel-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test-spring</artifactId>
+            <version>${camel-version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
